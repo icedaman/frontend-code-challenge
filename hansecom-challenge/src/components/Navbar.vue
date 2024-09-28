@@ -11,7 +11,7 @@ const isActiveLink = (routePath) => {
 <template>
   <nav class="bg-green-600 border-b border-green-500">
     <div class="mx-auto">
-      <div class="grid grid-cols-6 gap-4 p-10 rounded-lg text-center">
+      <div class="grid grid-cols-4 gap-4 p-10 rounded-lg text-center">
         <RouterLink to="/"
           :class="`${isActiveLink('/') ? 'bg-green-900 text-white' : 'hover:bg-gray-900 hover:text-white bg-slate-200'} text-2xl font-bold px-3 py-2 rounded-lg shadow-md`">
           Home
@@ -28,10 +28,10 @@ const isActiveLink = (routePath) => {
           :class="`${isActiveLink('/create-order') ? 'bg-green-900 text-white' : 'hover:bg-gray-900 hover:text-white bg-slate-200'} text-2xl font-bold px-3 py-2 rounded-lg shadow-md`">
           Create Order
         </RouterLink>
-        <RouterLink to="/orders"
+        <!-- <RouterLink to="/orders"
           :class="`${isActiveLink('/orders') ? 'bg-green-900 text-white' : 'hover:bg-gray-900 hover:text-white bg-slate-200'} text-2xl font-bold px-3 py-2 rounded-lg shadow-md`">
           Show Orders
-        </RouterLink>
+        </RouterLink> -->
       </div>
     </div>
   </nav>
