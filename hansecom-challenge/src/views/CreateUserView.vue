@@ -21,7 +21,8 @@ const handleSubmit = async () => {
   });
 
   try {
-    await axios.post(`http://localhost:3333/users`, newUser);
+    const response = await axios.post(`http://localhost:3333/users`, newUser);
+    console.log(response)
     toast.success('User Created Successfully');
     router.push('/users');
   } catch (error) {

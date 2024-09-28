@@ -28,8 +28,8 @@ const isActiveLink = (routePath) => {
           :class="`${isActiveLink('/create-order') ? 'bg-green-900 text-white' : 'hover:bg-gray-900 hover:text-white bg-slate-200'} text-2xl font-bold px-3 py-2 rounded-lg shadow-md`">
           Create Order
         </RouterLink>
-        <RouterLink to="/show-orders"
-          :class="`${isActiveLink('/show-orders') ? 'bg-green-900 text-white' : 'hover:bg-gray-900 hover:text-white bg-slate-200'} text-2xl font-bold px-3 py-2 rounded-lg shadow-md`">
+        <RouterLink to="/orders"
+          :class="`${isActiveLink('/orders') ? 'bg-green-900 text-white' : 'hover:bg-gray-900 hover:text-white bg-slate-200'} text-2xl font-bold px-3 py-2 rounded-lg shadow-md`">
           Show Orders
         </RouterLink>
       </div>

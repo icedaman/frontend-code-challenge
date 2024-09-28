@@ -13,13 +13,16 @@ const state = reactive({
   isLoading: true
 });
 
+const handleOrdersBtn = (id) => {
+  router.push(`/orders/${id}`);
+}
 const handleEditUser = (id) => {
-  router.push(`/user/${id}/edit`)
+  router.push(`/user/${id}/edit`);
 }
 
 const handleDeleteUser = async (id) => {
   try {
-    const confirm = window.confirm("Are you sure you want to delete this job?");
+    const confirm = window.confirm("Are you sure you want to delete this user?");
     if (confirm) {
       await axios.delete(`http://localhost:3333/users/${id}`);
       toast.success("User Successfully Deleted");
@@ -45,10 +48,13 @@ onMounted(async () => {
 
 <template>
   <div v-for="user in state.users" :key="user.id"
-    class="grid grid-cols-3 bg-slate-500 text-white text-2xl font-semibold mx-auto">
-    <div class="p-2">
+    class="grid grid-cols-4 bg-slate-500 text-white text-2xl font-semibold mx-10 border-2 border-green-500 m-2">
+    <div class="p-4">
       <h1>{{ user.fullName }}</h1>
       <h2>{{ user.email }}</h2>
+    </div>
+    <div class="p-4">
+      <button @click="handleOrdersBtn(user.id)">Orders</button>
     </div>
     <div class="p-4">
       <button @click="handleEditUser(user.id)">Edit</button>
