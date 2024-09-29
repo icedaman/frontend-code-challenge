@@ -4,6 +4,7 @@ import { onMounted, reactive } from 'vue';
 import { useRouter } from 'vue-router';
 import axios from 'axios';
 import { useToast } from 'vue-toastification';
+import UsersTable from '@/components/UsersTable.vue';
 
 const router = useRouter();
 const toast = useToast();
@@ -47,7 +48,12 @@ onMounted(async () => {
 </script>
 
 <template>
-  <div v-for="user in state.users" :key="user.id"
+  <div class="px-48 py-2 bg-gray-200 min-h-screen">
+    <UsersTable :users="state.users" @deleteUser="handleDeleteUser"/>
+  </div>
+
+
+  <!-- <div v-for="user in state.users" :key="user.id"
     class="grid grid-cols-4 bg-slate-500 text-white text-2xl font-semibold mx-10 border-2 border-green-500 m-2">
     <div class="p-4">
       <h1>{{ user.fullName }}</h1>
@@ -62,5 +68,5 @@ onMounted(async () => {
     <div class="p-4">
       <button @click="handleDeleteUser(user.id)">X</button>
     </div>
-  </div>
+  </div> -->
 </template>
