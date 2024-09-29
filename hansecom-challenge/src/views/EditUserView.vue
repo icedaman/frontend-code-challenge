@@ -39,7 +39,6 @@ const handleSubmit = async () => {
 }
 
 onMounted( async ()=> {
-  console.log(userId)
   try {
     const response = await axios.get(`http://localhost:3333/user/${userId}`);
     state.user = response.data;

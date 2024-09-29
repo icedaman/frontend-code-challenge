@@ -1,11 +1,13 @@
 <script setup>
-import { reactive } from 'vue';
+import { reactive, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 import axios from 'axios';
 import { useToast } from 'vue-toastification';
+import {useOrdersStore} from '@/stores/orders.js'
 
 const toast = useToast();
 const router = useRouter();
+const store = useOrdersStore();
 
 const form = reactive({
   userId: null,
@@ -13,23 +15,51 @@ const form = reactive({
   product: ''
 });
 
+
 const handleSubmit = async () => {
+  // get available userIds
+  let availableIds = [];
+
+  try {
+    const response = await axios.get(`http://localhost:3333/users`);
+    // console.log(response.data)
+    const userIds = response.data.map( (user)=> user.id);
+    availableIds = userIds;
+    // console.log(availableIds);
+  } catch (error) {
+    console.error(error);
+  }
+
+  const pickRandomId = availableIds[Math.floor(Math.random() * availableIds.length)];
+  console.log(pickRandomId)
+
   const newOrder = reactive({
-    userId: Number(form.userId),
+    userId: pickRandomId,
     orderDate: form.orderDate,
     product: form.product
   });
 
   try {
-    await axios.post(`http://localhost:3333/orders`, newOrder);
-     console.log(`newOrder: ${JSON.stringify(newOrder)}`)
+    // not working properly due to userId (user_id in db) always returning null from the API
+    // an order is created in the db with orderDate and product but the API does not allow the userId to be stored
+    // replacing the passed userId value in the form with null 
+
+    // const response = await axios.post(`http://localhost:3333/orders`, newOrder);
+
+    store.orders.push(newOrder);
     toast.success('Order Created Successfully');
-    router.push(`/orders/${newOrder.userId}`);
+    router.push(`/`);
+    // router.push(`/orders/${newOrder.userId}`);
   } catch (error) {
     console.error('Error creating order ', error);
     toast.error('Error Creating Order');
   }
 }
+
+onMounted(async () => {
+
+})
+
 
 </script>
 
