@@ -2,7 +2,7 @@
 import { onMounted, ref, computed } from 'vue';
 import SearchForm from '@/components/SearchForm.vue';
 
-const emit = defineEmits(['deleteUser']);
+const emit = defineEmits(['deleteUser', 'editUser']);
 
 const props = defineProps({
   users: {
@@ -30,6 +30,7 @@ const filteredUsers = computed( () => {
 const deleteUser = (id) => {
   emit('deleteUser', id );
 }
+
 </script>
 
 <template>
@@ -42,7 +43,7 @@ const deleteUser = (id) => {
           <th class="px-4 py-3">ID</th>
           <th class="px-4 py-3">Full Name</th>
           <th class="px-4 py-3">Email</th>
-          <th class="px-4 py-3 text-center">Edit</th>
+          <th class="px-4 py-3 text-center">Update</th>
           <th class="px-4 py-3 text-center">Delete</th>
           <th class="px-4 py-3 text-center">Orders</th>
         </tr>
@@ -53,7 +54,7 @@ const deleteUser = (id) => {
           <td class="px-4 py-3 font-medium text-gray-900">{{ user.fullName }}</td>
           <td class="px-4 py-3">{{ user.email }}</td>
           <td class="text-center text-white">
-            <RouterLink :to='"/orders/" + user.id' class="px-4 py-2 bg-yellow-600 rounded-lg">Edit User</RouterLink>
+            <RouterLink :to='"/user/" + user.id + "/edit"' class="px-4 py-2 bg-yellow-600 rounded-lg">Update User</RouterLink>
           </td>
           <td class="text-center text-white">
             <button @click="deleteUser(user.id)" class="px-4 py-2 bg-red-700 rounded-lg">Delete User</button>

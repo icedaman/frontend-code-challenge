@@ -14,13 +14,6 @@ const state = reactive({
   isLoading: true
 });
 
-const handleOrdersBtn = (id) => {
-  router.push(`/orders/${id}`);
-}
-const handleEditUser = (id) => {
-  router.push(`/user/${id}/edit`);
-}
-
 const handleDeleteUser = async (id) => {
   try {
     const confirm = window.confirm("Are you sure you want to delete this user?");
@@ -49,24 +42,6 @@ onMounted(async () => {
 
 <template>
   <div class="px-48 py-2 bg-gray-200 min-h-screen">
-    <UsersTable :users="state.users" @deleteUser="handleDeleteUser"/>
+    <UsersTable :users="state.users" @deleteUser="handleDeleteUser" />
   </div>
-
-
-  <!-- <div v-for="user in state.users" :key="user.id"
-    class="grid grid-cols-4 bg-slate-500 text-white text-2xl font-semibold mx-10 border-2 border-green-500 m-2">
-    <div class="p-4">
-      <h1>{{ user.fullName }}</h1>
-      <h2>{{ user.email }}</h2>
-    </div>
-    <div class="p-4">
-      <button @click="handleOrdersBtn(user.id)">Orders</button>
-    </div>
-    <div class="p-4">
-      <button @click="handleEditUser(user.id)">Edit</button>
-    </div>
-    <div class="p-4">
-      <button @click="handleDeleteUser(user.id)">X</button>
-    </div>
-  </div> -->
 </template>
