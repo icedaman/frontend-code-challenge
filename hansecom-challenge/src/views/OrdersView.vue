@@ -35,7 +35,6 @@ const handleDeleteOrder = async (id) => {
 
 <template>
   <div class="px-48 py-2 bg-gray-200 min-h-screen">
-    <OrdersTable :orders="store.orders"/>
-    <h1>{{ store.orders }}</h1>
+    <OrdersTable :orders="store.orders" />
   </div>
 </template>

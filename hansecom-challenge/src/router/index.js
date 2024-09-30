@@ -5,6 +5,7 @@ import UsersView from '../views/UsersView.vue'
 import EditUserView from '@/views/EditUserView.vue'
 import CreateOrderView from '@/views/CreateOrderView.vue'
 import OrdersView from '@/views/OrdersView.vue'
+import EditOrderView from '@/views/EditOrderView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -38,6 +39,11 @@ const router = createRouter({
       path: '/orders/:id',
       name: 'order',
       component: OrdersView
+    },
+    {
+      path: '/order/:id/edit',
+      name: 'order-user',
+      component: EditOrderView
     },
   ]
 })
