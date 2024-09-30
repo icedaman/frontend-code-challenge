@@ -1,5 +1,4 @@
 <script setup>
-
 import { onMounted, reactive } from 'vue';
 import axios from 'axios';
 import { useToast } from 'vue-toastification';
@@ -45,7 +44,7 @@ onMounted(async () => {
 </script>
 
 <template>
-  <div class="px-48 py-2 bg-gray-200 min-h-screen">
+  <div class="px-48 py-2 ">
     <UsersTable :users="state.users" @deleteUser="handleDeleteUser" />
   </div>
 </template>

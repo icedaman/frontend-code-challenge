@@ -1,6 +1,6 @@
 <script setup>
 import { ref, computed } from 'vue';
-import SearchForm from '@/components/SearchForm.vue';
+import SearchUserForm from '@/components/SearchUserForm.vue';
 
 const emit = defineEmits(['deleteUser', 'editUser']);
 
@@ -60,7 +60,7 @@ const deleteUser = (id) => {
 <template>
   <p class="w-full text-center text-4xl text-slate-700 font-bold my-10">Users List</p>
   <div class="bg-white relative border rounded-lg">
-    <SearchForm @search="handleSearch" />
+    <SearchUserForm @search="handleSearch" />
     <table class="w-full text-sm text-left text-gray-500">
       <thead class="text-xs text-gray-700 uppercase bg-gray-50">
         <tr>

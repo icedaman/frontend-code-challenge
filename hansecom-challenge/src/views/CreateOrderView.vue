@@ -3,7 +3,7 @@ import { reactive, onMounted } from 'vue';
 import { useRouter } from 'vue-router';
 import axios from 'axios';
 import { useToast } from 'vue-toastification';
-import {useOrdersStore} from '@/stores/orders.js'
+import { useOrdersStore } from '@/stores/orders.js'
 
 const toast = useToast();
 const router = useRouter();
@@ -15,25 +15,21 @@ const form = reactive({
   product: ''
 });
 
-
 const handleSubmit = async () => {
   // get available userIds
   let availableIds = [];
 
   try {
     const response = await axios.get(`http://localhost:3333/users`);
-    // console.log(response.data)
-    const userIds = response.data.map( (user)=> user.id);
-    availableIds = userIds;
-    // console.log(availableIds);
+    availableIds = response.data.map( (user)=> user.id);
   } catch (error) {
     console.error(error);
   }
 
   const pickRandomId = availableIds[Math.floor(Math.random() * availableIds.length)];
-  console.log(pickRandomId)
 
   const newOrder = reactive({
+    id: Math.floor(Math.random() * 10000),
     userId: pickRandomId,
     orderDate: form.orderDate,
     product: form.product
@@ -48,8 +44,7 @@ const handleSubmit = async () => {
 
     store.orders.push(newOrder);
     toast.success('Order Created Successfully');
-    router.push(`/`);
-    // router.push(`/orders/${newOrder.userId}`);
+    router.push(`/orders/${pickRandomId}`);
   } catch (error) {
     console.error('Error creating order ', error);
     toast.error('Error Creating Order');
@@ -64,7 +59,7 @@ onMounted(async () => {
 </script>
 
 <template>
-  <section class="bg-green-50">
+  <section>
     <div class="m-auto max-w-2xl py-24">
       <div class="bg-white px-6 py-8 mb-4 shadow-md rounded-md border m-4 md:m-0">
         <form @submit.prevent="handleSubmit">

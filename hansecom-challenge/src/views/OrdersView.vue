@@ -1,22 +1,16 @@
 <script setup>
 
 import { onMounted, reactive, ref } from 'vue';
-import { useRouter, useRoute } from 'vue-router';
+import { useRouter } from 'vue-router';
 import axios from 'axios';
 import { useToast } from 'vue-toastification';
+import { useOrdersStore } from '@/stores/orders.js';
+import OrdersTable from '@/components/OrdersTable.vue';
 
 const router = useRouter();
-const route = useRoute();
 const toast = useToast();
 
-const userId = route.params.id;
-
-const state = reactive({
-  orders: [],
-  isLoading: true
-});
-
-const o = ref({});
+const store = useOrdersStore();
 
 const handleEditOrder = (id) => {
   router.push(`/order/${id}/edit`);
@@ -36,21 +30,12 @@ const handleDeleteOrder = async (id) => {
   }
 }
 
-onMounted(async () => {
-  try {
-    const response = await axios.get(`http://localhost:3333/orders/${userId}`);
-    state.orders = response.data;
-    // o.value = response.data;
-    console.log(userId)
-    console.log(response)
-  } catch (error) {
-    console.error('Error fetching orders', error);
-  } finally {
-    state.isLoading = false;
-  }
-})
+
 </script>
 
 <template>
- <h1>{{ state.orders }}</h1>
+  <div class="px-48 py-2 bg-gray-200 min-h-screen">
+    <OrdersTable :orders="store.orders"/>
+    <h1>{{ store.orders }}</h1>
+  </div>
 </template>
