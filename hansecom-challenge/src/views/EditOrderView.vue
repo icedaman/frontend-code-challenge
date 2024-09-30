@@ -18,11 +18,6 @@ const form = reactive({
   orderDate: '',
 });
 
-// const state = reactive({
-//   order: {},
-//   isLoading: true
-// });
-
 const updateOrder = (editedOrder) => {
   const newOrdersArr = store.orders.filter(order => order.id !== Number(orderId));
   newOrdersArr.push(editedOrder);

@@ -8,18 +8,18 @@ const router = useRouter();
 const route = useRoute();
 const userId = route.params.id;
 
-const emit = defineEmits(['deleteUser', 'editUser']);
-
-// const props = defineProps({
-//   users: {
-//     type: Array,
-//     required: true
-//   }
-// });
+const emit = defineEmits(['orderDeleted']);
 
 const searchFilter = ref('');
 const orderDescending = ref(true);
 const colToOrder = ref('');
+
+const props = defineProps({
+  orders: {
+    type: Array,
+    required: true
+  }
+})
 
 const handleSearch = (searchInput) => {
   searchFilter.value = searchInput;
@@ -44,18 +44,13 @@ const sortByCol = (columnName) => {
 
 
 //TODO
-const deleteUser = (id) => {
+const deleteOrder = (id) => {
   console.log(id)
-  const newList = props.orders.filter(order =>order.id != id);
-  console.log(newList)
-}
+  // const newList = props.orders.filter(order =>order.id != id);
+  // console.log(newList)
+  emit('orderDeleted', id);
 
-const props = defineProps({
-  orders: {
-    type: Array,
-    required: true
-  }
-})
+}
 
 const filteredOrders = computed( () => {
   let orders = props.orders;
@@ -103,7 +98,7 @@ const filteredOrders = computed( () => {
             <RouterLink :to='"/order/" + order.id + "/edit"' class="px-4 py-2 bg-yellow-600 rounded-lg">Edit</RouterLink>
           </td>
           <td class="text-center text-white">
-            <button @click="deleteUser(order.id)" class="px-4 py-2 bg-red-700 rounded-lg">X</button>
+            <button @click="deleteOrder(order.id)" class="px-4 py-2 bg-red-700 rounded-lg">X</button>
           </td>
         </tr>
       </tbody>

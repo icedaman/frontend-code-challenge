@@ -1,6 +1,6 @@
 <script setup>
 
-import { onMounted, reactive, ref, watch } from 'vue';
+import { onMounted, reactive, ref, watchEffect } from 'vue';
 import { useRouter } from 'vue-router';
 import axios from 'axios';
 import { useToast } from 'vue-toastification';
@@ -12,17 +12,16 @@ const toast = useToast();
 
 const store = useOrdersStore();
 
-const handleEditOrder = (id) => {
-  router.push(`/order/${id}/edit`);
-}
-
 const handleDeleteOrder = async (id) => {
+  console.log(id)
   try {
     const confirm = window.confirm("Are you sure you want to delete this order?");
     if (confirm) {
-      await axios.delete(`http://localhost:3333/orders/${id}`);
+      //await axios.delete(`http://localhost:3333/orders/${id}`);
+      const newOrdersArr = store.orders.filter(order => order.id !== id);
+      store.orders = newOrdersArr;
       toast.success("Order Successfully Deleted");
-      router.push('/orders');
+      router.push('/users');
     }
   } catch (error) {
     console.error('Error deleting order', error);
@@ -31,12 +30,12 @@ const handleDeleteOrder = async (id) => {
 }
 
 onMounted(()=>{
-  watch(()=> console.log(store.orders))
+  watchEffect(()=> console.log(store.orders))
 })
 </script>
 
 <template>
   <div class="px-48 py-2 bg-gray-200 min-h-screen">
-    <OrdersTable :orders="store.orders" />
+    <OrdersTable :orders="store.orders" @orderDeleted="handleDeleteOrder" />
   </div>
 </template>
