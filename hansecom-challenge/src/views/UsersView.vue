@@ -14,21 +14,7 @@ const state = reactive({
   isLoading: true
 });
 
-const handleDeleteUser = async (id) => {
-  try {
-    const confirm = window.confirm("Are you sure you want to delete this user?");
-    if (confirm) {
-      await axios.delete(`http://localhost:3333/users/${id}`);
-      toast.success("User Successfully Deleted");
-      router.push('/users');
-    }
-  } catch (error) {
-    console.error('Error deleting user', error);
-    toast.error("Error Deleting User");
-  }
-}
-
-onMounted(async () => {
+const getUsers = async () => {
   try {
     const response = await axios.get(`http://localhost:3333/users`);
     state.users = response.data;
@@ -37,7 +23,27 @@ onMounted(async () => {
   } finally {
     state.isLoading = false;
   }
+}
+
+const handleDeleteUser = async (id) => {
+  try {
+    const confirm = window.confirm("Are you sure you want to delete this user?");
+    if (confirm) {
+      await axios.delete(`http://localhost:3333/users/${id}`);
+      toast.success("User Successfully Deleted");
+    }
+  } catch (error) {
+    console.error('Error deleting user', error);
+    toast.error("Error Deleting User");
+  }
+
+  getUsers();
+}
+
+onMounted(async () => {
+  getUsers();
 })
+
 </script>
 
 <template>
