@@ -1,6 +1,6 @@
 <script setup>
 
-import { onMounted, reactive, ref } from 'vue';
+import { onMounted, reactive, ref, watch } from 'vue';
 import { useRouter } from 'vue-router';
 import axios from 'axios';
 import { useToast } from 'vue-toastification';
@@ -30,7 +30,9 @@ const handleDeleteOrder = async (id) => {
   }
 }
 
-
+onMounted(()=>{
+  watch(()=> console.log(store.orders))
+})
 </script>
 
 <template>
