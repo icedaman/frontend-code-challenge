@@ -1,5 +1,5 @@
 <script setup>
-import { onMounted, ref, computed } from 'vue';
+import { ref, computed } from 'vue';
 import SearchForm from '@/components/SearchForm.vue';
 
 const emit = defineEmits(['deleteUser', 'editUser']);

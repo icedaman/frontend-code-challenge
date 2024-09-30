@@ -1,12 +1,10 @@
 <script setup>
 
 import { onMounted, reactive } from 'vue';
-import { useRouter } from 'vue-router';
 import axios from 'axios';
 import { useToast } from 'vue-toastification';
 import UsersTable from '@/components/UsersTable.vue';
 
-const router = useRouter();
 const toast = useToast();
 
 const state = reactive({
