@@ -44,7 +44,8 @@ const table = useVueTable(tableOptions);
 </script>
 
 <template>
-  <div class="px-4 sm:px-6 lg:px-8 bg-white rounded-xl shadow-2xl">
+  <div
+    class="px-4 sm:px-6 lg:px-8 sm:w-[90%] sm:pl-[5%] sm:pr-[5%] lg:w-[80%] lg:pl-[10%] lg:pr-[10%] bg-white rounded-xl shadow-2xl 2xl:w-[80%] 2xl:pl-[10%] 2xl:pr-[10%] mx-auto">
     <div class="mt-8 flow-root">
       <div class="-mx-4 -my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
         <div class="inline-block min-w-full py-2 align-middle sm:px-6 lg:px-8">
@@ -56,7 +57,7 @@ const table = useVueTable(tableOptions);
             <thead>
               <tr v-for="headerGroup in table.getHeaderGroups()" :key="headerGroup.id">
                 <th v-for="header in headerGroup.headers" :key="header.id" scope="col"
-                  class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 hover:bg-gray-400 hover:text-white bg-gray-50"
+                  class="px-3 py-3.5 text-left text-sm font-semibold text-gray-900 hover:bg-gray-400 hover:text-white bg-gray-100"
                   :class="{
                     'cursor-pointer select-none': header.column.getCanSort(),
                   }" @click="header.column.getToggleSortingHandler()?.($event)">
@@ -84,23 +85,23 @@ const table = useVueTable(tableOptions);
       </div>
       <div class="space-x-4 mt-8 text-center pb-4">
         <button
-          class="hover:bg-gray-700 hover:text-white border bg-gray-50 border-gray-300 rounded px-2 py-2 disabled:opacity-50 disabled:cursor-not-allowed"
+          class="hover:bg-gray-700 hover:text-white border bg-gray-100 border-gray-300 rounded px-2 py-2 disabled:opacity-50 disabled:cursor-not-allowed"
           @click="table.setPageIndex(0)">
           First page
         </button>
 
         <button
-          class="hover:bg-gray-700 hover:text-white border bg-gray-50 border-gray-300 rounded px-2 py-2 disabled:opacity-50 disabled:cursor-not-allowed"
+          class="hover:bg-gray-700 hover:text-white border bg-gray-100 border-gray-300 rounded px-2 py-2 disabled:opacity-50 disabled:cursor-not-allowed"
           :disabled="!table.getCanPreviousPage()" @click="table.previousPage()">
           Prev page
         </button>
         <button
-          class="hover:bg-gray-700 hover:text-white border bg-gray-50 border-gray-300 rounded px-2 py-2 disabled:opacity-50 disabled:cursor-not-allowed"
+          class="hover:bg-gray-700 hover:text-white border bg-gray-100 border-gray-300 rounded px-2 py-2 disabled:opacity-50 disabled:cursor-not-allowed"
           :disabled="!table.getCanNextPage()" @click="table.nextPage()">
           Next page
         </button>
         <button
-          class="hover:bg-gray-700 hover:text-white border bg-gray-50 border-gray-300 rounded px-2 py-2 disabled:opacity-50 disabled:cursor-not-allowed"
+          class="hover:bg-gray-700 hover:text-white border bg-gray-100 border-gray-300 rounded px-2 py-2 disabled:opacity-50 disabled:cursor-not-allowed"
           @click="table.setPageIndex(table.getPageCount() - 1)">
           Last page
         </button>

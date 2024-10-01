@@ -49,7 +49,7 @@ onMounted(async () => {
 </script>
 
 <template>
-  <div class="px-48 py-2 ">
+  <div class="2xl:px-48 py-2">
     <p class="w-full text-center text-4xl text-black font-bold my-10">Users List</p>
     <ReusableTable :data="usersStore.users" :columns="columnsUsers" />
   </div>
