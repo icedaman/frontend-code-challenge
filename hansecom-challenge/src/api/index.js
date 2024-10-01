@@ -24,7 +24,6 @@ export const getUsers = async () => {
   } catch (error) {
     console.error('Error fetching users', error);
   }
-
   return users;
 }
 
