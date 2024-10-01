@@ -1,35 +1,20 @@
-# hansecom-challenge
+# How to run this vue app:
 
-This template should help get you started developing with Vue 3 in Vite.
+After following the instructions to get the backend server up and running, simply run:
 
-## Recommended IDE Setup
+1: cd hansecom-challenge
+2: npm install
+3: npm run dev
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+That's it, you should be good to go!
 
-## Customize configuration
 
-See [Vite Configuration Reference](https://vitejs.dev/config/).
+# OBS:
 
-## Project Setup
+Even though the Users API works well, the Orders API is not working properly due to userId (user_id in db) always returning null from the API response.
 
-```sh
-npm install
-```
+When I create an order with a POST request, an order is created in the db with orderDate and product(and other date fields), but the API does not allow the userId to be stored, even if it's hard coded.
 
-### Compile and Hot-Reload for Development
+It replaces the userId value sent in the form by null.
 
-```sh
-npm run dev
-```
-
-### Compile and Minify for Production
-
-```sh
-npm run build
-```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-npm run lint
-```
+So to fix this issue I'm storing the orders on the Orders Store and in Local Storage to simulate the API's behaviour.
