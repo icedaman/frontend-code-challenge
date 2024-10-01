@@ -3,7 +3,7 @@ import { onMounted, h } from 'vue';
 import ReusableTable from '@/components/ReusableTable.vue';
 import { useUsersStore } from '@/stores/users.js';
 import { getUsers } from '@/api/index.js';
-import EditButton from '@/components/EditButton.vue';
+import EditUserButton from '@/components/EditUserButton.vue';
 import OrdersButton from '@/components/OrdersButton.vue';
 import DeleteUserButton from '@/components/DeleteUserButton.vue';
 
@@ -13,7 +13,6 @@ const columnsUsers = [
   {
     accessorKey: 'id',
     header: 'ID',
-    enableSorting: false,
   },
   {
     accessorKey: 'fullName',
@@ -32,7 +31,7 @@ const columnsUsers = [
   {
     accessorKey: '',
     header: 'Update',
-    cell: ({ row }) => h(EditButton, { id: row.original.id }),
+    cell: ({ row }) => h(EditUserButton, { id: row.original.id }),
     enableSorting: false,
   },
   {
