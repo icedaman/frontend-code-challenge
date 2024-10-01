@@ -1,28 +1,28 @@
 # Steps to set up the backend:
 
-1: Clone to repo
-2:  Run: npm install
-3: Create a .env file and populate with the following:
+1: Clone to repo<br/>
+2:  Run: npm install<br/>
+3: Create a .env file and populate with the following:<br/>
 
-TZ=UTC
-PORT=3333
-HOST=localhost
-LOG_LEVEL=info
-APP_KEY=qFlFnOw4MsxVSTajLUuothM9m_oPu7jp
-NODE_ENV=development
+TZ=UTC<br/>
+PORT=3333<br/>
+HOST=localhost<br/>
+LOG_LEVEL=info<br/>
+APP_KEY=qFlFnOw4MsxVSTajLUuothM9m_oPu7jp<br/>
+NODE_ENV=development<br/>
 
-4: Create a tmp folder in the root directory
-5: Run: node ace migration:run
-6: Run: node ace db:seed
-7: Run: npm run dev
+4: Create a tmp folder in the root directory<br/>
+5: Run: node ace migration:run<br/>
+6: Run: node ace db:seed<br/>
+7: Run: npm run dev<br/>
 
 # Steps to set up the front-end:
 
 After following the instructions to get the backend server up and running, simply run:
 
-1: cd hansecom-challenge
-2: npm install
-3: npm run dev
+1: cd hansecom-challenge<br/>
+2: npm install<br/>
+3: npm run dev<br/>
 
 That's it, you should be good to go!
 
