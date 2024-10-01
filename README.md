@@ -1,55 +1,38 @@
-Steps to set up backend:
+# Steps to set up the backend:
 
-1. Clone to repo
-2. Run: npm install
-3. Create a .env file and populate with the following:
+1: Clone to repo
+2:  Run: npm install
+3: Create a .env file and populate with the following:
 
-TZ=UTC<br/>
-PORT=3333<br/>
-HOST=localhost<br/>
-LOG_LEVEL=info<br/>
-APP_KEY=qFlFnOw4MsxVSTajLUuothM9m_oPu7jp<br/>
+TZ=UTC
+PORT=3333
+HOST=localhost
+LOG_LEVEL=info
+APP_KEY=qFlFnOw4MsxVSTajLUuothM9m_oPu7jp
 NODE_ENV=development
 
-4. Create a tmp folder in the root directory
-5. Run: node ace migration:run
-6. Run: node ace db:seed
-7. Run: npm run dev
+4: Create a tmp folder in the root directory
+5: Run: node ace migration:run
+6: Run: node ace db:seed
+7: Run: npm run dev
 
-The development server for the back end should be up and running. Do not make any changes here. Create a separate directory for the front end. If you try to access thes '/users' endpoint, you should see the seeded user provided.
+# Steps to set up the front-end:
 
-**Endpoints**<br/>
+After following the instructions to get the backend server up and running, simply run:
 
-Fetch all users</br>
-GET /users
+1: cd hansecom-challenge
+2: npm install
+3: npm run dev
 
-Create new user</br>
-POST /users</br>
-Expected body: { fullName: string, email: string, password: string }
+That's it, you should be good to go!
 
-Get user by id</br>
-GET /users/:id
 
-Delete user</br>
-DELETE /users/:id
+# OBS:
 
-Update user</br>
-PUT /user/:id/edit</br>
-Expected body: { fullName: string, email: string }
+Even though the Users API works well, the Orders API is not working properly due to userId (user_id in db) always returning null from the API response.
 
-Get orders by user id</br>
-GET /orders/:id
+When I create an order with a POST request, an order is created in the db with orderDate and product(and other date fields), but the API does not allow the userId to be stored, even if it's hard coded.
 
-Create order</br>
-POST /orders</br>
-Expected body: { userId: string, orderDate: date, product: string }
+It replaces the userId value sent in the form by null.
 
-Delete order</br>
-DELETE /orders/:id
-
-Get order by id</br>
-GET /order/:id
-
-Update order</br>
-PUT /order/:id/edit</br>
-Expected body: { orderDate: date, product: string }
+So to fix this issue I'm storing the orders on the Orders Store and in Local Storage to simulate the API's behaviour.
