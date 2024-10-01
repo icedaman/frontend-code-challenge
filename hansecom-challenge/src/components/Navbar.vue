@@ -14,7 +14,7 @@ const isActiveLink = (routePath) => {
       <div class="grid grid-cols-3 gap-4 p-10 px-56 rounded-lg text-center">
         <RouterLink to="/create-user"
           :class="`${isActiveLink('/create-user') ? 'bg-green-900 text-white' : 'hover:bg-gray-900 hover:text-white bg-slate-200'} text-2xl font-bold px-3 py-2 rounded-lg shadow-xl`">
-          Create User
+          Register User
         </RouterLink>
         <RouterLink to="/users"
           :class="`${isActiveLink('/users') ? 'bg-green-900 text-white' : 'hover:bg-gray-900 hover:text-white bg-slate-200'} text-2xl font-bold px-3 py-2 rounded-lg shadow-xl`">

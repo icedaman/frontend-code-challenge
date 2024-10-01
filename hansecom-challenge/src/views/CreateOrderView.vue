@@ -64,14 +64,14 @@ const saveOrdersToLocalStorage = () => {
         <form @submit.prevent="handleSubmit">
           <h2 class="text-3xl text-center font-semibold mb-6">Create Order</h2>
           <div class="mb-4">
-            <label class="block text-gray-700 font-bold mb-2">Order Date</label>
-            <input type="date" id="orderDate" name="orderDate" v-model="form.orderDate"
-              class="border rounded w-full py-2 px-3 mb-2" placeholder="Enter your orderDate" required />
-          </div>
-          <div class="mb-4">
             <label class="block text-gray-700 font-bold mb-2">Product Name</label>
             <input type="text" id="productName" name="productName" v-model="form.product"
               class="border rounded w-full py-2 px-3 mb-2" placeholder="Choose a product" required />
+          </div>
+          <div class="mb-4">
+            <label class="block text-gray-700 font-bold mb-2">Order Date</label>
+            <input type="date" id="orderDate" name="orderDate" v-model="form.orderDate"
+              class="border rounded w-full py-2 px-3 mb-2" placeholder="Enter your orderDate" required />
           </div>
           <div>
             <button
