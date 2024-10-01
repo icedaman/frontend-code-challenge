@@ -1,50 +1,64 @@
 <script setup>
-
-import { onMounted } from 'vue';
-import { useRouter } from 'vue-router';
-import { useToast } from 'vue-toastification';
+import { onMounted, h, ref, computed } from 'vue';
 import { useOrdersStore } from '@/stores/orders.js';
-import OrdersTable from '@/components/OrdersTable.vue';
+import ReusableTable from '@/components/ReusableTable.vue';
+import DeleteOrderButton from '@/components/DeleteOrderButton.vue';
+import EditOrderButton from '@/components/EditOrderButton.vue';
+import { useRoute } from 'vue-router';
 
-const router = useRouter();
-const toast = useToast();
-
+const route = useRoute();
 const ordersStore = useOrdersStore();
+const userId = route.params.id;
 
+const columnsOrders = [
+  {
+    accessorKey: 'id',
+    header: 'ID',
+  },
+  {
+    accessorKey: 'userId',
+    header: 'User ID',
+  },
+  {
+    accessorKey: 'product',
+    header: 'Product',
+  },
+  {
+    accessorKey: 'orderDate',
+    header: 'Order Date',
+  },
+  {
+    accessorKey: '',
+    header: 'Update',
+    cell: ({ row }) => h(EditOrderButton, { id: row.original.id }),
+    enableSorting: false,
+  },
+  {
+    accessorKey: '',
+    header: 'Delete',
+    cell: ({ row }) => h(DeleteOrderButton, { id: row.original.id }),
+    enableSorting: false,
+  },
+];
 
-const handleDeleteOrder = async (id) => {
-  try {
-    const confirm = window.confirm("Are you sure you want to delete this order?");
-    if (confirm) {
-      //await axios.delete(`http://localhost:3333/orders/${id}`);
-      const newOrdersArr = ordersStore.orders.filter(order => order.id !== id);
-      ordersStore.orders = newOrdersArr;
-      saveOrdersToLocalStorage();
-      toast.success("Order Successfully Deleted");
-      router.push('/users');
-    }
-  } catch (error) {
-    console.error('Error deleting order', error);
-    toast.error("Error Deleting Order");
-  }
-}
+const ordersfilteredByUserId = computed(() => {
+  const ordersById = ordersStore.orders.filter(order => order.userId === Number(userId));
+  return ordersById;
+})
 
 onMounted(() => {
   const savedOrders = JSON.parse(localStorage.getItem('orders'));
 
   if (savedOrders) {
-    ordersStore.orders = savedOrders;
+    ordersStore.orders =  savedOrders;
   }
 })
-
-const saveOrdersToLocalStorage = () => {
-  localStorage.setItem('orders', JSON.stringify(ordersStore.orders));
-}
 
 </script>
 
 <template>
-  <div class="px-48 py-2 bg-gray-200 min-h-screen">
-    <OrdersTable :orders="ordersStore.orders" @orderDeleted="handleDeleteOrder" />
+  <div class="px-48 py-2">
+    <p class="w-full text-center text-4xl text-slate-700 font-bold my-10">Orders List</p>
+    <ReusableTable :data="ordersfilteredByUserId" :columns="columnsOrders" />
   </div>
 </template>

@@ -50,6 +50,7 @@ onMounted(async () => {
 
 <template>
   <div class="px-48 py-2 ">
+    <p class="w-full text-center text-4xl text-slate-700 font-bold my-10">Users List</p>
     <ReusableTable :data="usersStore.users" :columns="columnsUsers" />
   </div>
 </template>

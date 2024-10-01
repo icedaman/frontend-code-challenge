@@ -24,6 +24,12 @@ const updateOrder = (editedOrder) => {
   return newOrdersArr.find(order => order.id === Number(orderId));
 }
 
+const getOrderOfUser = () => ordersStore.orders.find(order => {
+  if (order.id === Number(orderId)) {
+    return order;
+  } 
+})
+
 const handleSubmit = async () => {
   const editedOrder = reactive({
     id: ordersFilteredById[0].id,
@@ -37,7 +43,8 @@ const handleSubmit = async () => {
     await updateOrder(editedOrder);
     saveOrdersToLocalStorage();
     toast.success('Order Updated Successfully');
-    router.push('/users/');
+    const orderOfUser = getOrderOfUser();
+    router.push('/orders/'+orderOfUser.userId);
   } catch (error) {
     console.error('Error updating order ', error);
     toast.error('Error Updating Order');
