@@ -42,14 +42,8 @@ const sortByCol = (columnName) => {
   return orders;
 }
 
-
-//TODO
 const deleteOrder = (id) => {
-  console.log(id)
-  // const newList = props.orders.filter(order =>order.id != id);
-  // console.log(newList)
   emit('orderDeleted', id);
-
 }
 
 const filteredOrders = computed( () => {

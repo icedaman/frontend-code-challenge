@@ -12,6 +12,7 @@ const toast = useToast();
 
 const store = useOrdersStore();
 
+
 const handleDeleteOrder = async (id) => {
   console.log(id)
   try {
@@ -20,8 +21,9 @@ const handleDeleteOrder = async (id) => {
       //await axios.delete(`http://localhost:3333/orders/${id}`);
       const newOrdersArr = store.orders.filter(order => order.id !== id);
       store.orders = newOrdersArr;
+      saveOrdersToLocalStorage();
       toast.success("Order Successfully Deleted");
-      router.push('/users');
+      //router.push('/users');
     }
   } catch (error) {
     console.error('Error deleting order', error);
@@ -31,7 +33,16 @@ const handleDeleteOrder = async (id) => {
 
 onMounted(()=>{
   watchEffect(()=> console.log(store.orders))
+  const savedOrders = JSON.parse(localStorage.getItem('orders'));
+
+  if(savedOrders){
+    store.orders = savedOrders;
+  }
 })
+
+const saveOrdersToLocalStorage = () => {
+  localStorage.setItem('orders', JSON.stringify(store.orders));
+}
 </script>
 
 <template>

@@ -43,6 +43,7 @@ const handleSubmit = async () => {
     // const response = await axios.post(`http://localhost:3333/orders`, newOrder);
 
     store.orders.push(newOrder);
+    saveOrdersToLocalStorage();
     toast.success('Order Created Successfully');
     router.push(`/orders/${pickRandomId}`);
   } catch (error) {
@@ -51,9 +52,18 @@ const handleSubmit = async () => {
   }
 }
 
-onMounted(async () => {
+onMounted(()=>{
+  // watchEffect(()=> console.log(store.orders))
+  const savedOrders = JSON.parse(localStorage.getItem('orders'));
 
+  if(savedOrders){
+    store.orders = savedOrders;
+  }
 })
+
+const saveOrdersToLocalStorage = () => {
+  localStorage.setItem('orders', JSON.stringify(store.orders));
+}
 
 
 </script>

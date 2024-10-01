@@ -1,10 +1,8 @@
 <script setup>
 import { reactive, onMounted } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
-import axios from 'axios';
-import { useToast } from 'vue-toastification';
+import { editUser, getUserById } from '@/api/index.js';
 
-const toast = useToast();
 const router = useRouter();
 const route = useRoute();
 
@@ -28,27 +26,14 @@ const handleSubmit = async () => {
     password: form.password
   });
 
-  try {
-    await axios.put(`http://localhost:3333/user/${userId}/edit`, editedUser);
-    toast.success('User Updated Successfully');
-    router.push('/users');
-  } catch (error) {
-    console.error('Error updating user ', error);
-    toast.error('Error Updating User');
-  }
+  await editUser(userId, editedUser);
+  router.push('/users');
 }
 
-onMounted( async ()=> {
-  try {
-    const response = await axios.get(`http://localhost:3333/user/${userId}`);
-    state.user = response.data;
-    form.fullName = state.user.full_name;
-    form.email = state.user.email;
-  } catch (error) {
-    console.error('Error fetching users ', error);
-  } finally {
-    state.isLoading = false;
-  }
+onMounted(async () => {
+  state.user = await getUserById(userId);
+  form.fullName = state.user.full_name;
+  form.email = state.user.email;
 });
 
 </script>

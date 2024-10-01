@@ -2,7 +2,7 @@
 import { ref, computed } from 'vue';
 import SearchUserForm from '@/components/SearchUserForm.vue';
 
-const emit = defineEmits(['deleteUser', 'editUser']);
+const emit = defineEmits(['userDeleted']);
 
 const props = defineProps({
   users: {
@@ -52,7 +52,7 @@ const filteredUsers = computed( () => {
 })
 
 const deleteUser = (id) => {
-  emit('deleteUser', id );
+  emit('userDeleted', id );
 }
 
 </script>
