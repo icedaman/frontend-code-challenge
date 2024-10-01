@@ -2,7 +2,6 @@
 import { useOrdersStore } from '@/stores/orders.js';
 import { onMounted } from 'vue';
 import { useToast } from 'vue-toastification';
-import { useRouter } from 'vue-router';
 
 defineProps({
   id: Number,
@@ -10,7 +9,6 @@ defineProps({
 
 const ordersStore = useOrdersStore();
 const toast = useToast();
-const router = useRouter();
 
 const handleDeleteOrder = async (id) => {
   try {

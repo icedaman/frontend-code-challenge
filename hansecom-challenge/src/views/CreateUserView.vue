@@ -37,7 +37,7 @@ const handleSubmit = async () => {
           </div>
           <div class="mb-4">
             <label class="block text-gray-700 font-bold mb-2">Email</label>
-            <input type="text" id="email" name="email" v-model="form.email" class="border rounded w-full py-2 px-3 mb-2"
+            <input type="email" id="email" name="email" v-model="form.email" class="border rounded w-full py-2 px-3 mb-2"
               placeholder="Enter your email" required />
           </div>
           <div class="mb-4">

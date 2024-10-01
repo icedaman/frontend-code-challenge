@@ -1,5 +1,5 @@
 <script setup>
-import { onMounted, h, ref, computed } from 'vue';
+import { onMounted, h, computed } from 'vue';
 import { useOrdersStore } from '@/stores/orders.js';
 import ReusableTable from '@/components/ReusableTable.vue';
 import DeleteOrderButton from '@/components/DeleteOrderButton.vue';
@@ -58,7 +58,7 @@ onMounted(() => {
 
 <template>
   <div class="px-48 py-2">
-    <p class="w-full text-center text-4xl text-slate-700 font-bold my-10">Orders List</p>
+    <p class="w-full text-center text-4xl text-black font-bold my-10">Orders List</p>
     <ReusableTable :data="ordersfilteredByUserId" :columns="columnsOrders" />
   </div>
 </template>

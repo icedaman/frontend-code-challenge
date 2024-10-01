@@ -10,11 +10,11 @@ import EditOrderView from '@/views/EditOrderView.vue'
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
-    // {
-    //   path: '/',
-    //   name: 'home',
-    //   component: HomeView
-    // },
+    {
+      path: '/',
+      name: 'home',
+      component: HomeView
+    },
     {
       path: '/create-user',
       name: 'create-user',
@@ -42,7 +42,7 @@ const router = createRouter({
     },
     {
       path: '/order/:id/edit',
-      name: 'order-user',
+      name: 'order-edit',
       component: EditOrderView
     },
   ]

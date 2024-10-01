@@ -59,7 +59,7 @@ onMounted(async () => {
           <div class="mb-4">
             <label class="block text-gray-700 font-bold mb-2">Email</label>
             <input
-              type="text"
+              type="email"
               id="email"
               name="email"
               v-model="form.email"
