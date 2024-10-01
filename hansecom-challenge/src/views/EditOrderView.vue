@@ -77,7 +77,8 @@ const saveOrdersToLocalStorage = () => {
           <div class="mb-4">
             <label class="block text-gray-700 font-bold mb-2">Product Name</label>
             <input type="text" id="product" name="product" v-model="form.product"
-              class="border rounded w-full py-2 px-3 mb-2" placeholder="Enter the product name" required />
+              class="border rounded w-full py-2 px-3 mb-2" placeholder="Enter the product name" minlength="4"
+              maxlength="20" required />
           </div>
           <div class="mb-4">
             <label class="block text-gray-700 font-bold mb-2">Order Date</label>
