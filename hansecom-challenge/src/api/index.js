@@ -1,16 +1,22 @@
 import axios from 'axios';
 import { useToast } from 'vue-toastification';
-// import { useRoute, useRouter } from 'vue-router';
 
-// const router = useRouter();
-// const route = useRoute();
 const toast = useToast();
 
 //TODO LATER ? create loading status for requests 
 
 
 // USERS
-export const getUsers = async () =>{
+export const createUser = async (newUser) => {
+  try {
+    await axios.post(`http://localhost:3333/users`, newUser);
+    toast.success('User Created Successfully');
+  } catch (error) {
+    console.error('Error creating user ', error);
+  }
+}
+
+export const getUsers = async () => {
   let users = [];
   try {
     const response = await axios.get(`http://localhost:3333/users`);
@@ -28,7 +34,6 @@ export const deleteUser = async (id, users) => {
     if (confirm) {
       await axios.delete(`http://localhost:3333/users/${id}`);
       const newUsersArr = users.filter(order => order.id !== id);
-      console.log(newUsersArr)
       users = newUsersArr;
       toast.success("User Successfully Deleted");
     }
@@ -65,3 +70,8 @@ export const getUserById = async (id) => {
 
 // ORDERS 
 
+// Orders API is not working properly due to userId (user_id in db) always returning null from the API response
+// an order is created in the db with orderDate and product but the API does not allow the userId to be stored, even if it's hard coded
+// replacing the passed userId value in the form by null 
+
+//So I'm storing the orders on the Orders Store and in Local Storage to simulate the API's behaviour

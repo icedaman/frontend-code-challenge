@@ -1,11 +1,9 @@
 <script setup>
 import { reactive } from 'vue';
-import axios from 'axios';
-import { useToast } from 'vue-toastification';
 import { useRouter } from 'vue-router';
+import { createUser } from '@/api/index.js';
 
 const router = useRouter();
-const toast = useToast();
 
 const form = reactive({
   fullName: '',
@@ -20,13 +18,8 @@ const handleSubmit = async () => {
     password: form.password
   });
 
-  try {
-    await axios.post(`http://localhost:3333/users`, newUser);
-    toast.success('User Created Successfully');
-    router.push('/users');
-  } catch (error) {
-    console.error('Error creating user ', error);
-  }
+  await createUser(newUser);
+  router.push('/users');
 }
 
 </script>

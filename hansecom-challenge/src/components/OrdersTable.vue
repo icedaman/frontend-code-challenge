@@ -1,15 +1,11 @@
 <script setup>
-import { ref, computed, watch, onMounted } from 'vue';
+import { ref, computed } from 'vue';
 import SearchOrderForm from '@/components/SearchOrderForm.vue';
-import { useRouter, useRoute } from 'vue-router';
+import { useRoute } from 'vue-router';
 
-
-const router = useRouter();
 const route = useRoute();
 const userId = route.params.id;
-
 const emit = defineEmits(['orderDeleted']);
-
 const searchFilter = ref('');
 const orderDescending = ref(true);
 const colToOrder = ref('');
@@ -32,13 +28,13 @@ const sort = (colName) => {
 
 const sortByCol = (columnName) => {
   let orders = props.orders;
-  
-  if(orderDescending.value){
-    orders = orders.sort( (a, b) => a[columnName] > b[columnName] ? -1 : b[columnName] > a[columnName] ? 1 : 0);
-  } else{
-    orders = orders.sort( (a, b) => a[columnName] > b[columnName] ? 1 : b[columnName] > a[columnName] ? -1 : 0);
+
+  if (orderDescending.value) {
+    orders = orders.sort((a, b) => a[columnName] > b[columnName] ? -1 : b[columnName] > a[columnName] ? 1 : 0);
+  } else {
+    orders = orders.sort((a, b) => a[columnName] > b[columnName] ? 1 : b[columnName] > a[columnName] ? -1 : 0);
   }
-  
+
   return orders;
 }
 
@@ -46,24 +42,22 @@ const deleteOrder = (id) => {
   emit('orderDeleted', id);
 }
 
-const filteredOrders = computed( () => {
+const filteredOrders = computed(() => {
   let orders = props.orders;
 
   orders = sortByCol(colToOrder.value);
-  orders = props.orders.filter( order => order.userId === Number(userId));
-  
-  if(searchFilter.value !== ''){
-    orders = props.orders.filter( order => (
-      // Number(order.id).includes(Number(searchFilter.value))
-      (order.orderDate.includes(searchFilter.value) || 
-      order.product.toLowerCase().includes(searchFilter.value.toLowerCase())) && 
+  orders = props.orders.filter(order => order.userId === Number(userId));
+
+  if (searchFilter.value !== '') {
+    orders = props.orders.filter(order => (
+      (order.orderDate.includes(searchFilter.value) ||
+        order.product.toLowerCase().includes(searchFilter.value.toLowerCase())) &&
       order.userId === Number(userId)
     ));
   }
 
   return orders;
 })
-
 
 </script>
 
@@ -75,9 +69,12 @@ const filteredOrders = computed( () => {
       <thead class="text-xs text-gray-700 uppercase bg-gray-50">
         <tr>
           <th class="px-4 py-3">User ID</th>
-          <th class="px-4 py-3 cursor-pointer hover:bg-slate-300" @click="sort('id')">ID {{ orderDescending ? '&darr;' : '&uarr;' }}</th>
-          <th class="px-4 py-3 cursor-pointer hover:bg-slate-300" @click="sort('product')">Product {{ orderDescending ? '&darr;' : '&uarr;' }}</th>
-          <th class="px-4 py-3 cursor-pointer hover:bg-slate-300" @click="sort('orderDate')">Order Date {{ orderDescending ? '&darr;' : '&uarr;' }}</th>
+          <th class="px-4 py-3 cursor-pointer hover:bg-slate-300" @click="sort('id')">ID {{ orderDescending ? '&darr;' :
+            '&uarr;' }}</th>
+          <th class="px-4 py-3 cursor-pointer hover:bg-slate-300" @click="sort('product')">Product {{ orderDescending ?
+            '&darr;' : '&uarr;' }}</th>
+          <th class="px-4 py-3 cursor-pointer hover:bg-slate-300" @click="sort('orderDate')">Order Date {{
+            orderDescending ? '&darr;' : '&uarr;' }}</th>
           <th class="px-4 py-3 text-center">Update Order</th>
           <th class="px-4 py-3 text-center">Delete Order</th>
         </tr>
@@ -89,7 +86,8 @@ const filteredOrders = computed( () => {
           <td class="px-4 py-3">{{ order.product }}</td>
           <td class="px-4 py-3">{{ order.orderDate }}</td>
           <td class="text-center text-white">
-            <RouterLink :to='"/order/" + order.id + "/edit"' class="px-4 py-2 bg-yellow-600 rounded-lg">Edit</RouterLink>
+            <RouterLink :to='"/order/" + order.id + "/edit"' class="px-4 py-2 bg-yellow-600 rounded-lg">Edit
+            </RouterLink>
           </td>
           <td class="text-center text-white">
             <button @click="deleteOrder(order.id)" class="px-4 py-2 bg-red-700 rounded-lg">X</button>
