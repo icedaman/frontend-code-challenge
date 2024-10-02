@@ -16,10 +16,6 @@ const columnsOrders = [
     header: 'ID',
   },
   {
-    accessorKey: 'userId',
-    header: 'User ID',
-  },
-  {
     accessorKey: 'product',
     header: 'Product',
   },

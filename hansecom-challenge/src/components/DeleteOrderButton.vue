@@ -26,14 +26,6 @@ const handleDeleteOrder = async (id) => {
   }
 }
 
-onMounted(() => {
-  const savedOrders = JSON.parse(localStorage.getItem('orders'));
-
-  if (savedOrders) {
-    ordersStore.orders = savedOrders;
-  }
-})
-
 const saveOrdersToLocalStorage = () => {
   localStorage.setItem('orders', JSON.stringify(ordersStore.orders));
 }
